@@ -1,0 +1,10 @@
+apiVersion: k8s.nginx.org/v1
+kind: VirtualServer
+metadata:
+  name: test
+spec:
+  host: test.example.com
+  routes:
+  - path: /
+    route: virtualserverroute
+  

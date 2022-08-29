@@ -1,0 +1,26 @@
+apiVersion: k8s.nginx.org/v1
+kind: VirtualServer
+metadata:
+  name: test
+spec:
+  host: test.example.com
+  tls:
+    secret: test-secret
+  upstreams:
+  - name: webdemo
+    service: webdemo
+    port: 80
+  - name: httpbin
+    service: httpbin
+    port: 8000
+  routes:
+  - path: /webdemo
+    action:
+      proxy:
+        upstream: webdemo
+        rewritePath: /
+  - path: /httpbin
+    action:
+      proxy:
+        upstream: httpbin
+        rewritePath: /
